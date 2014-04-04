@@ -25,6 +25,7 @@ imap <buffer> => ⇒
 imap <buffer> >> »
 imap <buffer> .<space> ∙<space>
 imap <buffer> forall<space> ∀
+imap <buffer> undefined ⊥
 
 
 " Turn syntax highlight on for new symbols
@@ -65,6 +66,7 @@ function s:UTF8ToHaskellSrc()
     silent %s/»/>>/eg
     silent %s/∙ /. /eg
     silent %s/∀/forall /eg
+    silent %s/⊥/undefined/eg
 
 
 	let &l:fileencoding = s:oldencoding
@@ -89,6 +91,7 @@ function s:HaskellSrcToUTF8()
     silent %s/[^λ←→≲≳≡≠⇒»∙∀\\\-!#$%&*+/<=>?@\^|~.]\@<==>\([^λ←→≲≳≡≠⇒»∙∀\\\-!#$%&*+/<=>\?@\^|~.]\)/⇒\1/eg
     silent %s/[^λ←→≲≳≡≠⇒»∙∀\\\-!#$%&*+/<=>?@\^|~.]\@<=>>\([^λ←→≲≳≡≠⇒»∙∀\\\-!#$%&*+/<=>\?@\^|~.]\)/»\1/eg
     silent %s/forall /∀/eg
+    silent %s/undefined/⊥/eg
     silent %s/ \@<=\. /∙ /eg
     
 	let &l:fileencoding = s:oldencoding
