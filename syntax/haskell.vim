@@ -28,7 +28,7 @@ syn match  hsFloat            "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 " a capital letter.  Note that this also handles the case of @M.lookup@ where
 " M is a qualified import.  There is a big negative lookbehind assertion here
 " so that we don't highlight import and module statements oddly. 
-syn match hsTypeName "\(^import\s.*\|^module\s.*\)\@<!\([^a-zA-Z0-9]\)\@<=[A-Z][a-zA-Z0-9_]*"
+syn match hsTypeName "\(^import\s.*\|^module\s.*\)\@<!\([^a-zA-Z0-9а-яА-Я]\)\@<=[A-ZА-Я][a-zA-Z0-9_а-яА-Я]*"
 " Also make unit and the empty list easy to spot - they are constructors too.
 syn match hsTypeName "()"
 syn match hsTypeName "\[\]"
@@ -56,6 +56,7 @@ syn match hsHaddockSection '-- \$.*$'
 
 " Keywords appearing in expressions, plus a few top-level keywords
 syn keyword hsKeyword do let in _ where 
+syn keyword hsKeyword делаю пусть где
 syn keyword hsKeyword infix infixl infixr
 syn keyword hsKeyword forall foreign
 syn match hsKeyword '\(^\(data\|type\)\s\+\)\@<=family\(\W\)\@='
@@ -64,12 +65,15 @@ syn match hsKeyword '\(^\(data\|type\)\s\+\)\@<=family\(\W\)\@='
 " haskell conditionals.  These are just keywords with a slightly more flexible
 " coloring.
 syn keyword hsConditional case of if then else otherwise when unless
+syn keyword hsConditional перекресток из если тогда иначе наконец когда покаНеБудет
+syn match hsOperator "(\|λ\|←\|→\|≲\|≳\|≡\|≠\| )"
 
 " We define a region for module NNNN (...) where so that haddock section
 " headers (-- *) can be highlighted specially only within this context.
 syn region hsModuleHeader start="^module\s" end="where" contains=hsHaddockSection keepend fold transparent
 " Treat Module imports as the #include category; it maps reasonably well
 syn keyword hsImport import qualified as hiding module
+syn keyword hsImport добавить спрятать
 
 syn keyword hsTypeDecls class instance data newtype type deriving default
 " FIXME: Maybe we can do something fancy for data/type families?  'family' is
